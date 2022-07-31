@@ -13,6 +13,7 @@ function App() {
       <header>
         <NavBar />
       </header>
+      <body>
       <div className="content">
         <Routes>
           <Route path="/" element={<Login/>}  exact/>
@@ -20,6 +21,8 @@ function App() {
           <Route path="/create" element={<Create/>} />
         </Routes>
       </div>
+      </body>
+      
       </div>
   );
 }

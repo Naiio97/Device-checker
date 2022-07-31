@@ -40,7 +40,11 @@
          }
     }
     
-
+    .error {
+        color: red;
+        font-size: .8rem;
+        margin-top: .5rem;
+    }
 
     button {
         background: $main-color;

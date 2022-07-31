@@ -43,5 +43,14 @@
         "os": "iOS",
         "versionOs": 15.4,
         "img": ""
+    },
+    {
+        "id": 6,
+        "identifier": "Nevim",
+        "producer": "Apple",
+        "model": "iPhone 11",
+        "os": "iOS",
+        "versionOs": 15.4,
+        "img": ""
     }
 ]
