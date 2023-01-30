@@ -1,6 +1,5 @@
 @import 'variables';
 
-
 .form-create {
     background: rgba(255, 255, 255, 0.93);
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.423);
@@ -40,10 +39,8 @@
          }
     }
     
-
-
     button {
-        background: $main-color;
+        background: #323232;
         border: none;
         width: 100%;
         font-family: 'roboto', sans-serif;
@@ -55,7 +52,7 @@
         cursor: pointer;
 
         &:hover {
-            background:rgb(86, 153, 229) ;
+            background:#ec6726;
         }
     }
 }

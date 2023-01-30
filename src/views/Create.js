@@ -1,125 +1,119 @@
-import React ,{useState} from 'react'
-import { nanoid } from 'nanoid'
-import data from "../data/data.json"
-import '../scss/create.scss'
-// import { useNavigate } from 'react-router-dom'
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom'
+import { setNotification } from '../redux/actions';
+
+import '../scss/create.scss';
 // import axios from 'axios'
 
-
-
 const Create = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [code, setCode] = useState('');
+  const [vendor, setVendor] = useState('');
+  const [model, setModel] = useState('');
+  const [os, setOs] = useState('');
+  const [osVersion, setOsVersion] = useState('');
+  const [image, setImage] = useState('');
 
-    
-    // useEffect(() => {
-    //     if (localStorage.getItem('')) {
-    //         navigate.push("/devices")
-    //     }
-    // }, [])
-
-    //  axios.post('https://js-test-api.etnetera.cz/api/v1/phones', data).then(
-    //       res => {
-    //           console.log(res);
-    //       }
-    //     ).catch (
-    //         err => {
-    //          console.log(err);
-    //         }
-    //     )
-    //  }
+  const createDevice = async (e) => {
+    e.preventDefault();
   
+    const response = await fetch(
+        'https://js-test-api.etnetera.cz/api/v1/phones',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Auth-Token': localStorage.getItem('token'),
+          },
+          body: JSON.stringify({
+            code,
+            os,
+            vendor,
+            model,
+            osVersion,
+            image
+          })
+        });
 
-    const [addFormData, setAddFormData] = useState({
-        identifier: '',
-        producer: '', 
-        model: '',
-        os: '',
-        versionOs: '',
-        img: ''
-    }) 
-
-    const handleAddFormChange = (e) => {
-        e.preventDefault();
-
-        const fieldName = e.target.getAttribute('name');
-        const fieldValue = e.target.value;
-
-        const newFormData = { ...addFormData };
-        newFormData[fieldName] = fieldValue
-
-        setAddFormData(newFormData)
-    }
-
-    const handleAddFormSubmit = (e) => {
-        e.preventDefault();
-
-        const newDevice = {
-            id: nanoid(),
-            identifier: addFormData.identifier,
-            producer: addFormData.producer, 
-            model: addFormData.model,
-            os: addFormData.os,
-            versionOs: addFormData.versionOs,
-            img: addFormData.img
-        };
-
-        
+        if(response.status === 201){
+            console.log('ok');
+            navigate('/Devices');
+            dispatch(setNotification('ahoj'));
+        }
     };
 
-    return (
-        <div className="form-create">
-            <h1>Nové zařízení</h1>
-        
-            <form onSubmit={handleAddFormSubmit}>
-                <input
-                    type="text"
-                    name="identifier"
-                    onChange={handleAddFormChange}
-                    placeholder="Kódové označní (identifikátor)">
-                </input> <br />
+  return (
+    <div>
+      <main>
+        <form onSubmit={createDevice} className="form-create">
+          <h1>Nové zařízení</h1>
+          <label style={{ display: 'none' }}>Kódové označení</label>
+          <input
+            type="text"
+            name="code"
+            id="code"
+            placeholder="Kódové označení (identifikátor)"
+            value={code}
+            onChange={(e) => setCode(e.target.value)}
+            required
+          />
+          <label style={{ display: 'none' }}>Výrobce</label>
+          <input
+            type="text"
+            name="vendor"
+            id="vendor"
+            placeholder="Výrobce"
+            value={vendor}
+            onChange={(e) => setVendor(e.target.value)}
+            required
+          />
+          <label style={{ display: 'none' }}>Model</label>
+          <input
+            type="text"
+            name="model"
+            id="model"
+            placeholder="Model"
+            value={model}
+            onChange={(e) => setModel(e.target.value)}
+            required
+          />
+          <label style={{ display: 'none' }}>Operační systém</label>
+          <input
+            type="text"
+            name="os"
+            id="os"
+            placeholder="Operační systém"
+            value={os}
+            onChange={(e) => setOs(e.target.value)}
+            required
+          />
+          <label style={{ display: 'none' }}>Verze OS</label>
+          <input
+            type="text"
+            name="versionOs"
+            id="versionOs"
+            placeholder="Verze OS"
+            value={osVersion}
+            onChange={(e) => setOsVersion(e.target.value)}
+            required
+          />
+          <label style={{ display: 'none' }}>URL obrázku</label>
+          <input
+            type="text"
+            name="image"
+            id="image"
+            placeholder="URL obrázku"
+            value={image}
+            onChange={(e) => setImage(e.target.value)}
+            required
+          />
+          <button>Přidat zařízení</button>
+        </form>
+      </main>
+    </div>
+  );
+};
 
-                <input
-                    type="text"
-                    name="producer"
-                    onChange={handleAddFormChange}
-                    placeholder="Výrobce">
-                </input> <br />
-
-                <input
-                    type="text"
-                    name="model"
-                    onChange={handleAddFormChange}
-                    placeholder="Model">
-                </input> <br />
-
-                <input
-                    type="text"
-                    name="os"
-                    onChange={handleAddFormChange}
-                    placeholder="Operační systém">
-                </input> <br />
-
-                <input
-                    type="text"
-                    name="versionOs"
-                    onChange={handleAddFormChange}
-                    placeholder="Verze operačního systému">
-                </input> <br />
-
-                <input
-                    type="text"
-                    name="img"
-                    onChange={handleAddFormChange} 
-                     placeholder="Obrázek">
-                </input> <br />
-
-                <button
-                    type="submit">
-                    Přidat zařízení
-                </button>
-            </form>
-        </div>
-    )
-
-}
-
-export default Create; 
+export default Create;

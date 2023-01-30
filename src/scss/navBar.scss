@@ -6,21 +6,85 @@ header {
     .bar {
         position: relative;
         margin: 0 auto;
-        max-width: 1440px;  
+        max-width: 1200px;  
         
         img {
-            padding: 0.8rem;
-            margin: 5px 0 0 15px;
+            padding: 3px;
+            margin: 5px 0 0 10px;
         }
 
-        .btn-bar {
+        .userEmail {
             position: absolute;
+            font-family: Arial, Helvetica, sans-serif;
+            right: 257px;
             top: 15px;
-            right:10px;
-            padding: 0.5rem 1.5rem;
+            font-size: 16px;
+            color: #ec6726;
+            padding: 0.5rem 1rem;
+            
+        }
+
+        .log {
+            position: absolute;
+            font-size: 16px;
+            top: 15px;
+            right:30px;
+            padding: 0.5rem 1rem;
+            background: $main-color;
+            cursor: pointer;
+            color: #f5f5f774;
+            border: none;
+            
+
+            &:hover{
+              color:#f5f5f7;  
+            }
+            
+            &:after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            background: #ec6726;
+            transition: width .3s;
+        
+            }
+            &:hover::after {
+            width: 20px;
+            }
+        }
+
+
+        
+        .add {
+            position: absolute;
+            font-size: 16px;
+            top: 15px;
+            right:121px;
+            padding: 0.5rem 1rem;
+            background: $main-color;
+            cursor: pointer;
+            color: #f5f5f774;
+            border: none;
+
+            &:hover{
+              color:#f5f5f7;  
+            }
+            
+            &:after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            background: #ec6726;
+            transition: width .3s;
+        
+            }
+            &:hover::after {
+            width: 20px;
+            }
         }
     }
-
 }
 
 

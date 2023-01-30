@@ -2,66 +2,15 @@
 
 
 main {
-    max-width: 1440px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
-.main-devices {
-    display: flex;
-    flex-wrap: wrap;    
-    
-
-    .device-div {
-        width: 310px;
-        height: 400px;
-        margin: 25px;
-        background-color: white;
-        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.423);
-
-        .device-img {
-            display: flex;
-            margin: 0 auto;
-            width: 200px;
-            height: 50%;
-            padding: 10px;
-        }
-
-        .device-info {
-            padding: 20px 15px 15px 15px;
-
-            h1 {
-                font-size: 1.5rem;
-                font-weight: 400;
-            }
-
-            span {
-                color:rgb(117, 117, 117);
-            }   
-            
-            .span-os {
-                color: black;
-                margin: 30px 0;
-            }
-        }
-        
-        #btn-device {
-            display: block;
-            width: 95%;
-            margin: 0px auto;
-            height: 30px;
-            background-color: $main-color;
-            border: none;
-
-            &:hover {
-                cursor: pointer;
-                background-color: rgb(75, 155, 246);
-                color: white;
-                transition: all 0.3s ease-in-out;        
-            }   
-            
-        }
-    }
-
+.devices-container {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+   @media screen and (max-width: 1200px){
+        justify-content: none;
+   }
 }
-
-

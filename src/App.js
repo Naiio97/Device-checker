@@ -1,5 +1,5 @@
 import React from 'react'
-import { Routes, Route} from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import NavBar from './components/NavBar'
 
@@ -9,21 +9,14 @@ import Create from './views/Create'
 
 function App() {
   return (
-    <div className="App">
-      <header>
-        <NavBar />
-      </header>
-      <body>
-      <div className="content">
-        <Routes>
-          <Route path="/" element={<Login/>}  exact/>
-          <Route path="/devices" element={<Devices/>} />
-          <Route path="/create" element={<Create/>} />
-        </Routes>
-      </div>
-      </body>
-      
-      </div>
+    <BrowserRouter>
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<Login />} exact />
+        <Route path="/devices" element={<Devices />} />
+        <Route path="/create" element={<Create />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setIsLogged } from '../redux/actions';
 import { useNavigate } from 'react-router-dom';
 import '../scss/login.scss';
 
 const Login = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -14,7 +18,7 @@ const Login = () => {
     const response = await fetch(
       'https://js-test-api.etnetera.cz/api/v1/login',
       {
-        method: 'POST', // or 'PUT'
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -30,10 +34,15 @@ const Login = () => {
     if (response.status === 200) {
       localStorage.setItem('token', data.token);
       localStorage.setItem('userId', data.id);
+      localStorage.setItem('email', data.login)
       navigate('/devices');
     } else if (response.status === 401) {
       setError({message: 'Špatné jméno nebo heslo'});
     } 
+
+    if (data.token) {
+      dispatch(setIsLogged(true))
+    }
   };
 
   return (
