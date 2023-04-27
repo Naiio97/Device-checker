@@ -40,7 +40,7 @@ const Create = () => {
         if(response.status === 201){
             console.log('ok');
             navigate('/Devices');
-            dispatch(setNotification('ahoj'));
+            dispatch(setNotification('Zařízení bylo uspěšně přidáno'));
         }
     };
 

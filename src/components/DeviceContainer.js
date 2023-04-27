@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import '../scss/deviceContainer.scss';
 import no_image from '../assets/no_image.png';
 import { RxCross2 } from 'react-icons/rx';
+import {
+  setNotification,
+  setDevices,
+  setFilteredDevices,
+} from '../redux/actions';
 
 const DeviceContainer = ({
   id,
@@ -13,6 +18,8 @@ const DeviceContainer = ({
   image,
   borrowed,
 }) => {
+  const dispatch = useDispatch();
+
   const [borrowersUserId, setBorrowersUserId] = useState(
     borrowed ? borrowed.user.id : null
   );
@@ -25,6 +32,8 @@ const DeviceContainer = ({
   const [borrowerDetails, setBorrowerDetails] = useState({});
   const isAdmin = useSelector((state) => state.isAdmin);
   const [display, setDisplay] = useState('none');
+  const filteredDevices = useSelector((state) => state.filteredDevices);
+   const devices = useSelector((state) => state.devices);
 
   const returnDevice = async () => {
     await fetch(`https://js-test-api.etnetera.cz/api/v1/phones/${id}/return`, {
@@ -54,7 +63,6 @@ const DeviceContainer = ({
     );
 
     const data = await response.json();
-    console.log('🚀 ~ file: DeviceContainer.js:57 ~ borrowDevice ~ data', data);
 
     setBorrowerDetails({
       userId: data.borrowed.user.id,
@@ -101,12 +109,21 @@ const DeviceContainer = ({
         },
       }
     );
+
+    if (response.status === 204) {
+      dispatch(setNotification('Zařízení bylo uspěšně odstraněno.'));
+      dispatch(
+        setFilteredDevices(filteredDevices.filter((device) => device.id !== id))
+      );
+      dispatch(setDevices(devices.filter((device) => device.id !== id)));
+    }
   };
 
   useEffect(() => {
     if (borrowed) {
       getBorrowersData();
     }
+    setDevices();
   }, []);
 
   if (!image) {

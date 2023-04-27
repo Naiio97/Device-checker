@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { setIsAdmin, setDevices, setFilteredDevices } from '../redux/actions';
+import { setIsAdmin, setDevices, setFilteredDevices, setNotification } from '../redux/actions';
 import DeviceContainer from '../components/DeviceContainer'
+import { GiConfirmed } from 'react-icons/gi';
 
 import '../scss/devices.scss';
 import SearchBar from '../components/SearchBar';
@@ -53,33 +54,46 @@ const Devices = () => {
       dispatch(setFilteredDevices(data))
     }
   }
-console.log(notification);
+
+  const closeNotification = () => {
+    dispatch(setNotification(''))
+  }
 
    useEffect(() => {
      userOrAdmin();
      getPhones();
+     setTimeout( () => {
+     //closeNotification();
+     },2000)
+     
+
    }, []);
 
   return (
     <main>
       <SearchBar />
-      
+
       {notification && (
-        <div>{notification}</div>
+        <div className="success-notification">
+          <GiConfirmed className="notification-icon" />
+          {notification}
+        </div>
       )}
+
       <div className="devices-container">
-        {filteredDevices && filteredDevices.map((device) => (
-          <DeviceContainer
-            key={device.id}
-            id={device.id}
-            model={device.model}
-            vendor={device.vendor}
-            os={device.os}
-            osVersion={device.osVersion}
-            image={device.image}
-            borrowed={device.borrowed}
-          />
-        ))}
+        {filteredDevices &&
+          filteredDevices.map((device) => (
+            <DeviceContainer
+              key={device.id}
+              id={device.id}
+              model={device.model}
+              vendor={device.vendor}
+              os={device.os}
+              osVersion={device.osVersion}
+              image={device.image}
+              borrowed={device.borrowed}
+            />
+          ))}
       </div>
     </main>
   );

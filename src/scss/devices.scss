@@ -6,6 +6,27 @@ main {
     margin: 0 auto;
 }
 
+.success-notification {
+    position: relative;
+    text-align: center;
+    margin: 0 auto;
+    padding:10px 0;
+    border: 1px solid #EAF7EE;
+    border-radius: 10px;
+    background-color: #EAF7EE;
+    width: 400px;
+    
+
+    .notification-icon {
+        color: #3AB25C;
+        width: 20px;
+        height: 20px;
+        position: relative;
+        top: 4px;
+        right: 5px;
+    }
+}
+
 .devices-container {
    display: flex;
    flex-wrap: wrap;
