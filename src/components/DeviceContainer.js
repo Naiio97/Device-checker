@@ -172,7 +172,7 @@ const DeviceContainer = ({
       onMouseLeave={(e) => hideButton(e)}
     >
       <div key={id} className="device-div">
-        {isAdmin ? (
+        {isAdmin && !isDeviceBorrowed ? (
           <RxCross2 className={display} onClick={(e) => deleteDevice(e)} />
         ) : (
           ''

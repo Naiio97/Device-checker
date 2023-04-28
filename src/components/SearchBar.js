@@ -21,7 +21,7 @@ const SearchBar = () => {
 
   useEffect(() => {
     let filteredDevices = devices.filter((device) => {
-      if (!search && !osFilter) {
+      if (!search && !osFilter && !vendorFilter) {
         return true;
       }
 
@@ -44,8 +44,7 @@ const SearchBar = () => {
       if (vendorFilter && device.vendor === vendorFilter) {
         return true;
       }
-      
-      return false;
+       return false;
     });
 
     filteredDevices = available
@@ -79,14 +78,23 @@ const SearchBar = () => {
   let vendorSelectValues = [...new Set(vendors)];
 
   const handleVendor = (e) => {
-    dispatch(setVendor(e.target.value));
+    if (e.target.value === 'Všichni') {
+      dispatch(setVendor(''));
+    } else {
+      dispatch(setVendor(e.target.value));
+    }
   };
 
   const os = devices.map((device) => device.os);
   let osSelectValues = [...new Set(os)];
 
   const handleOs = (e) => {
-    dispatch(setOs(e.target.value));
+    if (e.target.value === 'Všechny') {
+      dispatch(setOs(''));
+    } else {
+      dispatch(setOs(e.target.value));
+    }
+  
   };
 
   
@@ -95,12 +103,7 @@ const SearchBar = () => {
     <div className="search-bar">
       <div className="search-os">
         <label>Systém</label>
-        <select
-          id="os"
-          name="os"
-          onChange={(e) => handleOs(e)}
-          placeholder="Nezáleží"
-        >
+        <select id="os" name="os" onChange={(e) => handleOs(e)}>
           <option>Všechny</option>
           {osSelectValues.map((os) => {
             return (
@@ -117,7 +120,6 @@ const SearchBar = () => {
           id="vendor"
           name="vendor"
           onChange={(e) => handleVendor(e)}
-          placeholder="Nezáleží"
         >
           <option>Všichni</option>
           {vendorSelectValues.map((vendor) => {

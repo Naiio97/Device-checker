@@ -2,12 +2,14 @@
 
 header {
     background: $main-color;
+    height: 50px;
 
     .bar {
-        position: relative;
+        display: flex;
         margin: 0 auto;
         max-width: 1200px;  
-        height: 65px;
+        justify-content: flex-end;
+        padding-top: 7px;
         
         img {
             padding: 3px;
@@ -15,21 +17,16 @@ header {
         }
 
         .userEmail {
-            position: absolute;
             font-family: Arial, Helvetica, sans-serif;
-            right: 257px;
-            top: 15px;
             font-size: 16px;
             color: #ec6726;
             padding: 0.5rem 1rem;
-            
         }
 
         .log {
-            position: absolute;
+            
             font-size: 16px;
-            top: 15px;
-            right:30px;
+            
             padding: 0.5rem 1rem;
             background: $main-color;
             cursor: pointer;
@@ -58,10 +55,9 @@ header {
 
         
         .add {
-            position: absolute;
+            
             font-size: 16px;
-            top: 15px;
-            right:121px;
+            
             padding: 0.5rem 1rem;
             background: $main-color;
             cursor: pointer;
