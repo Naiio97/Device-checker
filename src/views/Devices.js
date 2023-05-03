@@ -8,7 +8,6 @@ import { GiConfirmed } from 'react-icons/gi';
 import '../scss/devices.scss';
 import SearchBar from '../components/SearchBar';
 
-
 const Devices = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -46,9 +45,8 @@ const Devices = () => {
         'Auth-Token': localStorage.getItem('token'),
       }
     })
-
     const data = await response.json();
-
+    
     if (response.status === 200) {
       dispatch(setDevices(data));
       dispatch(setFilteredDevices(data))
@@ -58,15 +56,16 @@ const Devices = () => {
   const closeNotification = () => {
     dispatch(setNotification(''))
   }
+  
+  if(notification){
+     setTimeout(() => {
+       closeNotification();
+     }, 2000);
+  }
 
    useEffect(() => {
      userOrAdmin();
      getPhones();
-     setTimeout( () => {
-     //closeNotification();
-     },2000)
-     
-
    }, []);
 
   return (
