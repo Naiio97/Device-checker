@@ -15,9 +15,20 @@ const Create = () => {
   const [os, setOs] = useState('');
   const [osVersion, setOsVersion] = useState('');
   const [image, setImage] = useState('');
+  const [isRequired, setIsRequired] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('Toto pole je povinné.');  
+  
 
   const createDevice = async (e) => {
     e.preventDefault();
+
+   if(code === '' || vendor === '' || model === '' || os === '' || osVersion === ''){
+    setIsRequired(true);
+    return false;
+   }else{
+    setIsRequired(false);
+   }
+ 
   
     const response = await fetch(
         'https://js-test-api.etnetera.cz/api/v1/phones',
@@ -57,8 +68,9 @@ const Create = () => {
             placeholder="Kódové označení (identifikátor)"
             value={code}
             onChange={(e) => setCode(e.target.value)}
-            required
           />
+          {code === '' && isRequired && <span>{errorMsg}</span>}
+
           <label style={{ display: 'none' }}>Výrobce</label>
           <input
             type="text"
@@ -67,8 +79,9 @@ const Create = () => {
             placeholder="Výrobce"
             value={vendor}
             onChange={(e) => setVendor(e.target.value)}
-            required
           />
+          {vendor === '' && isRequired && <span>{errorMsg}</span>}
+
           <label style={{ display: 'none' }}>Model</label>
           <input
             type="text"
@@ -77,8 +90,9 @@ const Create = () => {
             placeholder="Model"
             value={model}
             onChange={(e) => setModel(e.target.value)}
-            required
           />
+          {model === '' && isRequired && <span>{errorMsg}</span>}
+
           <label style={{ display: 'none' }}>Operační systém</label>
           <input
             type="text"
@@ -87,8 +101,9 @@ const Create = () => {
             placeholder="Operační systém"
             value={os}
             onChange={(e) => setOs(e.target.value)}
-            required
           />
+          {os === '' && isRequired && <span>{errorMsg}</span>}
+
           <label style={{ display: 'none' }}>Verze OS</label>
           <input
             type="text"
@@ -97,8 +112,9 @@ const Create = () => {
             placeholder="Verze OS"
             value={osVersion}
             onChange={(e) => setOsVersion(e.target.value)}
-            required
           />
+          {osVersion === '' && isRequired && <span>{errorMsg}</span>}
+
           <label style={{ display: 'none' }}>URL obrázku</label>
           <input
             type="text"
@@ -107,8 +123,8 @@ const Create = () => {
             placeholder="URL obrázku"
             value={image}
             onChange={(e) => setImage(e.target.value)}
-            required
           />
+        
           <button>Přidat zařízení</button>
         </form>
       </main>

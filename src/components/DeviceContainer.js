@@ -33,7 +33,7 @@ const DeviceContainer = ({
   const isAdmin = useSelector((state) => state.isAdmin);
   const [display, setDisplay] = useState('none');
   const filteredDevices = useSelector((state) => state.filteredDevices);
-   const devices = useSelector((state) => state.devices);
+  const devices = useSelector((state) => state.devices);
 
   const returnDevice = async () => {
     await fetch(`https://js-test-api.etnetera.cz/api/v1/phones/${id}/return`, {
@@ -75,29 +75,6 @@ const DeviceContainer = ({
     setThisUserBorrowed(true);
   };
 
-  const getBorrowersData = async () => {
-    const response = await fetch(
-      `https://js-test-api.etnetera.cz/api/v1/phones/${id}`,
-      {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Auth-Token': localStorage.getItem('token'),
-        },
-      }
-    );
-
-    const data = await response.json();
-
-    if (data && data.borrowed) {
-      setBorrowerDetails({
-        userId: data.borrowed.user.id,
-        userName: data.borrowed.user.name,
-        date: new Date(data.borrowed.date).toLocaleString(),
-      });
-    }
-  };
-
   const deleteDevice = async () => {
     const response = await fetch(
       `https://js-test-api.etnetera.cz/api/v1/phones/${id}`,
@@ -119,12 +96,34 @@ const DeviceContainer = ({
     }
   };
 
-  useEffect(() => {
-    if (borrowed) {
-      getBorrowersData();
-    }
-    setDevices();
-  }, []);
+
+   useEffect(() => {
+     if (borrowed) {
+       const getBorrowersData = async () => {
+         const response = await fetch(
+           `https://js-test-api.etnetera.cz/api/v1/phones/${id}`,
+           {
+             method: 'GET',
+             headers: {
+               'Content-Type': 'application/json',
+               'Auth-Token': localStorage.getItem('token'),
+             },
+           }
+         );
+
+         const data = await response.json();
+
+         if (data && data.borrowed) {
+           setBorrowerDetails({
+             userId: data.borrowed.user.id,
+             userName: data.borrowed.user.name,
+             date: new Date(data.borrowed.date).toLocaleString(),
+           });
+         }
+       };
+       getBorrowersData();
+     }
+   }, []);
 
   if (!image) {
     image = no_image;
