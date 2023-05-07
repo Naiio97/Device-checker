@@ -53,19 +53,7 @@ const SearchBar = () => {
     dispatch(setFilteredDevices(filteredDevices));
   }, [search, available, osFilter, vendorFilter]);
 
-  // const getDevices = async () => {
-  //   const response = await fetch(
-  //     'https://js-test-api.etnetera.cz/api/v1/phones',
-  //     {
-  //       method: 'GET',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         'Auth-Token': localStorage.getItem('token'),
-  //       },
-  //     });
-  //   const data = await response.json();
-  // };
-
+  
   const handleSearch = (e) => {
     dispatch(setSearch(e.target.value.toLowerCase()));
   };
@@ -97,10 +85,17 @@ const SearchBar = () => {
   
   };
 
-  
-
   return (
     <div className="search-bar">
+      <div className="search-model">
+        <MdSearch />
+        <input
+          id="search"
+          type="text"
+          placeholder="Hledat model"
+          onChange={(e) => handleSearch(e)}
+        ></input>
+      </div>
       <div className="search-os">
         <label>Systém</label>
         <select id="os" name="os" onChange={(e) => handleOs(e)}>
@@ -116,11 +111,7 @@ const SearchBar = () => {
       </div>
       <div className="search-producer">
         <label>Výrobce</label>
-        <select
-          id="vendor"
-          name="vendor"
-          onChange={(e) => handleVendor(e)}
-        >
+        <select id="vendor" name="vendor" onChange={(e) => handleVendor(e)}>
           <option>Všichni</option>
           {vendorSelectValues.map((vendor) => {
             return (
@@ -140,15 +131,6 @@ const SearchBar = () => {
           onChange={(e) => handleAvailable(e)}
         ></input>
         <label>Jen dostupné</label>
-      </div>
-      <div className="search-model">
-        <MdSearch />
-        <input
-          id="search"
-          type="text"
-          placeholder="Hledat model"
-          onChange={(e) => handleSearch(e)}
-        ></input>
       </div>
     </div>
   );

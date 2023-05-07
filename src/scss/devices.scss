@@ -10,12 +10,12 @@ main {
     position: relative;
     text-align: center;
     margin: 0 auto;
-    padding:10px 0;
+    padding: 10px 0;
     border: 1px solid #EAF7EE;
     border-radius: 10px;
     background-color: #EAF7EE;
     width: 400px;
-    
+
 
     .notification-icon {
         color: #3AB25C;
@@ -28,10 +28,22 @@ main {
 }
 
 .devices-container {
-   display: flex;
-   flex-wrap: wrap;
-   justify-content: center;
-   @media screen and (max-width: 1200px){
-        justify-content: none;
-   }
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+
+    @media (max-width: 1200px) {
+        grid-template-columns: repeat(3, 1fr);
+        padding: 0 10px;
+    }
+
+    @media (max-width: 860px) {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 0 10px;
+    }
+
+    @media (max-width: 600px) {
+        grid-template-columns: repeat(1, 1fr);
+        margin-top: 20px;
+    }
 }

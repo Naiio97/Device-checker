@@ -7,82 +7,136 @@ header {
     .bar {
         display: flex;
         margin: 0 auto;
-        max-width: 1200px;  
+        max-width: 1200px;
         justify-content: flex-end;
         padding-top: 7px;
-        
-        img {
-            padding: 3px;
-            margin: 5px 0 0 10px;
+
+        @media (max-width: 600px) {
+            display: none;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .responsive-menu {
+            display: block;
+            background-color: #323232;
+            position: relative;
+            z-index: 10;
+        }
+    }
+
+    img {
+        padding: 3px;
+        margin: 5px 0 0 10px;
+    }
+
+    .userEmail {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 16px;
+        color: #ec6726;
+        padding: 0.5rem 1rem;
+
+        @media (max-width: 600px) {
+            display: block;
+        }
+    }
+
+    .log {
+        font-size: 16px;
+        padding: 0.5rem 1rem;
+        background: $main-color;
+        cursor: pointer;
+        color: #f5f5f774;
+        border: none;
+
+        @media (max-width: 600px) {
+            display: block;
         }
 
-        .userEmail {
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 16px;
-            color: #ec6726;
-            padding: 0.5rem 1rem;
+
+        &:hover {
+            color: #f5f5f7;
         }
 
-        .log {
-            
-            font-size: 16px;
-            
-            padding: 0.5rem 1rem;
-            background: $main-color;
-            cursor: pointer;
-            color: #f5f5f774;
-            border: none;
-            
-
-            &:hover{
-              color:#f5f5f7;  
-            }
-            
-            &:after {
+        &:after {
             content: '';
             display: block;
             width: 0;
             height: 2px;
             background: #ec6726;
             transition: width .3s;
-        
-            }
-            &:hover::after {
-            width: 20px;
-            }
         }
 
+        &:hover::after {
+            width: 20px;
+        }
+    }
 
-        
-        .add {
-            
-            font-size: 16px;
-            
-            padding: 0.5rem 1rem;
-            background: $main-color;
-            cursor: pointer;
-            color: #f5f5f774;
-            border: none;
-            text-decoration: none;
+    .add {
+        display: inline-block;
+        font-size: 16px;
+        padding: 0.5rem 1rem;
+        background: $main-color;
+        cursor: pointer;
+        color: #f5f5f774;
+        border: none;
+        text-decoration: none;
 
-            &:hover{
-              color:#f5f5f7;  
-            }
-            
-            &:after {
+        &:hover {
+            color: #f5f5f7;
+        }
+
+        &:after {
             content: '';
             display: block;
             width: 0;
             height: 2px;
             background: #ec6726;
             transition: width .3s;
-        
-            }
-            &:hover::after {
+        }
+
+        &:hover::after {
             width: 20px;
-            }
+        }
+    }
+
+    .hamburger {
+        display: none;
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        color: #eee;
+        border: none;
+        background-color: #323232;
+        z-index: 100;
+
+        svg {
+            width: 2em;
+            height: 2em;
+        }
+
+        @media (max-width: 600px) {
+            display: block;
+        }
+    }
+
+    .mobile-icon {
+        display: none;
+        position: relative;
+        top: 12px;
+        left: 12px;
+        color: #eee;
+        border: none;
+        background-color: #323232;
+        z-index: 100;
+
+        svg {
+            width: 2em;
+            height: 2em;
+        }
+
+        @media (max-width: 600px) {
+            display: block;
         }
     }
 }
-
-

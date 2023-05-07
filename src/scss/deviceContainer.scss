@@ -1,9 +1,7 @@
 @import 'variables';
 
 .device-container {
-  width: 280px;
   height: 360px;
-  margin: 10px;
   background-color: #f2f2f2;
   border-radius: 10px;
   position: relative;
@@ -22,12 +20,6 @@
 
   .none {
     display: none;
-  }
-
-  @media screen and (max-width: 1200px) {
-    width: 355px;
-    height: 410px;
-    margin: 10px;
   }
 
   .borrowed_detail {

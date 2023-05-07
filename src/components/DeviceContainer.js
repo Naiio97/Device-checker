@@ -123,7 +123,7 @@ const DeviceContainer = ({
        };
        getBorrowersData();
      }
-   }, []);
+   }, [borrowed, id]);
 
   if (!image) {
     image = no_image;
