@@ -25,10 +25,15 @@ Fetch API - a modern JavaScript API for making HTTP requests.
 Bootstrap - a CSS framework for responsive design and rapid development.
 
 Users name
+
 Admin 
+
 Email: gandalf.the.grey@etnetera.cz
+
 Password: wh1tew1zard
 
 User
+
 Email: frodo.baggins@etnetera.cz
+
 Password: theoner1ng
